@@ -18,7 +18,7 @@ const execute = async(query) => {
     }
 };
 
-const createTblQuery = `
+let createTblQuery = `
     CREATE TABLE IF NOT EXISTS "users" (
         id uuid PRIMARY KEY DEFAULT gen_random_uuid(),
         email VARCHAR(200) NOT NULL UNIQUE,
@@ -28,6 +28,22 @@ const createTblQuery = `
 execute(createTblQuery).then(result => {
     if (result) {
         console.log('Table "users" is created');
+    }
+});
+
+createTblQuery = `
+    CREATE TABLE IF NOT EXISTS "posttable" (
+	    "id" SERIAL PRIMARY KEY,         
+	    "title" VARCHAR(200) NOT NULL,
+	    "body" VARCHAR(200) NOT NULL,
+	    "date" TIMESTAMP NOT NULL,
+        "urllink" VARCHAR(200)  
+    );`;
+
+// A function to execute the previous query
+execute(createTblQuery).then(result => {
+    if (result) {
+        console.log('Table "posttable" is created');
     }
 });
 

@@ -5,11 +5,11 @@
         <h3>Add post</h3>
       </div>
       <div>
-        <form id="addPostForm" method="post" action="javascript:void(0);">
+        <form>
 
           <label for="postBody">Post body</label><br>
           <input v-model="postBody" type="text" id="postBody" placeholder="Post Body"><br>
-          <button type="submit">Add post</button>
+          <button @click="addPost">Add post</button>
         </form>
       </div>
     </div>
@@ -19,17 +19,44 @@
 <script>
 export default {
   name: "addPostForm",
-  methods: {
-
-  },
   data() {
     return {
-      postBody: null,
-    }
-  }
-
-}
-
+      post: {
+        title: "",
+        body: "",
+        date: "",
+        urllink: "",
+      },
+    };
+  },
+  methods: {
+    addPost() {
+      var data = {
+        title: this.post.title,
+        body: this.post.body,
+        date: new Date(),
+        urllink: this.post.urllink,
+      };
+      // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
+      fetch("http://localhost:3000/api/posts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+          .then((response) => {
+            console.log(response.data);
+            // redirect to /allposts view
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
+    },
+  },
+};
 </script>
 
 <style scoped>
