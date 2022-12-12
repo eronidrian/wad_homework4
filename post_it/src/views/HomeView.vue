@@ -11,8 +11,6 @@
           <button @click='this.$router.push("/add_post")'>Add Post</button>
           <button>Delete all</button>
         </div>
-
-
       </div>
       <div class="side"></div>
     </div>
@@ -46,8 +44,23 @@ export default {
     },
   },
   methods: {
-    NullifyLikes: function () {
-      this.$store.commit("NullifyLikes")
+    fetchData() {
+      fetch("http://localhost:3000/api/posts", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            console.log(data);
+            this.posts = data;
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
     },
     Logout() {
       fetch("http://localhost:3000/auth/logout", {

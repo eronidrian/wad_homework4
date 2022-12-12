@@ -1,7 +1,7 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
     user: "postgres",
-    password: "password",
+    password: "postgres",
     database: "post_it",
     host: "localhost",
     port: "5432"
@@ -44,7 +44,7 @@ execute(insertDataQuery).then(result => {
 createTblQuery = `
     CREATE TABLE IF NOT EXISTS "posttable" (
 	    "id" SERIAL PRIMARY KEY,
-	    "create_time" DATE NOT NULL,
+	    "create_time" DATE NOT NULL DEFAULT CURRENT_DATE,
 	    "body" VARCHAR(200) NOT NULL
     );`;
 
@@ -56,10 +56,10 @@ execute(createTblQuery).then(result => {
 });
 
 insertDataQuery = `
-    INSERT INTO posttable (create_time, body) VALUES
-      ('2022-10-15', 'Anyone knows in which room is the lab today?'),
-      ('2022-11-22', 'Do we need to use Vue.js again?'),
-      ('2022-12-02', 'Homework 4 is too much work');`;
+    INSERT INTO "posttable" (create_time, body) VALUES
+      (DATE '2022-10-15', 'Anyone knows in which room is the lab today?'),
+      (DATE '2022-11-22', 'Do we need to use Vue.js again?'),
+      (DATE '2022-12-02', 'Homework 4 is too much work');`;
 
 execute(insertDataQuery).then(result => {
     if (result) {

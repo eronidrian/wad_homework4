@@ -8,12 +8,7 @@
       <p> {{ post.body }} </p>
     </div>
     <div class="cardFooter">
-      <div v-on:click="IncreaseLikes ">
-        <img class="thumbsUp" src="../assets/thumbs-up-regular.svg" alt="Thumbs up image">
-      </div>
-      <div>
-        {{ post.likes }} likes
-      </div>
+      <img class="thumbsUp" src="../assets/thumbs-up-regular.svg" alt="Thumbs up image">
     </div>
   </div>
 </template>
@@ -31,9 +26,6 @@ export default {
     },
   },
   methods: {
-    IncreaseLikes: function () {
-      this.$store.commit("IncreaseLikes", this.getId)
-    }
   }
 }
 </script>

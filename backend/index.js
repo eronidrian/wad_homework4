@@ -4,6 +4,8 @@ const cors = require('cors');
 const bcrypt = require('bcrypt');
 const cookieParser = require('cookie-parser');
 const jwt = require('jsonwebtoken');
+// set timezone to GMT+0, because otherwise the date in fetched posts will be 2 hours behind
+process.env.TZ = "Europe/lisbon";
 
 const port = process.env.PORT || 3000;
 
