@@ -55,7 +55,7 @@ execute(createTblQuery).then(result => {
     }
 });
 
-insertDataQuery = `
+/*insertDataQuery = `
     INSERT INTO "posttable" (create_time, body) VALUES
       (DATE '2022-10-15', 'Anyone knows in which room is the lab today?'),
       (DATE '2022-11-22', 'Do we need to use Vue.js again?'),
@@ -65,6 +65,6 @@ execute(insertDataQuery).then(result => {
     if (result) {
         console.log('Data inserted to "posttable" ');
     }
-});
+});*/
 
 module.exports = pool;

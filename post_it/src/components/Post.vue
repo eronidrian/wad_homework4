@@ -2,7 +2,7 @@
   <div class="textBodyCard">
     <div class="cardHeader">
       <img class="cardProfilePicture" src="../assets/me.png" alt="Profile picture">
-      <p> {{ post.create_time }} </p>
+      <p> {{ getDate }}</p>
     </div>
     <div class="textCard">
       <p> {{ post.body }} </p>
@@ -23,6 +23,9 @@ export default {
   computed: {
     getId() {
       return this.post.id;
+    },
+    getDate() {
+      return this.post.create_time.split('T')[0];
     },
   },
   methods: {

@@ -14,7 +14,6 @@
       </div>
       <div class="side"></div>
     </div>
-
   </div>
 </template>
 
@@ -34,14 +33,12 @@ export default {
   },
   data: function() {
     return {
-      posts:[ ],
+      posts: null,
       authResult: auth.authenticated()
     }
   },
-  computed: {
-    posts() {
-      return this.$store.getters.posts
-    },
+  created: function(){
+    this.fetchData();
   },
   methods: {
     fetchData() {
@@ -54,7 +51,6 @@ export default {
       })
           .then((response) => response.json())
           .then((data) => {
-            console.log(data);
             this.posts = data;
           })
           .catch((e) => {
