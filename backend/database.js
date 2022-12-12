@@ -33,17 +33,27 @@ execute(createTblQuery).then(result => {
 
 createTblQuery = `
     CREATE TABLE IF NOT EXISTS "posttable" (
-	    "id" SERIAL PRIMARY KEY,         
-	    "title" VARCHAR(200) NOT NULL,
-	    "body" VARCHAR(200) NOT NULL,
-	    "date" TIMESTAMP NOT NULL,
-        "urllink" VARCHAR(200)  
+	    "id" SERIAL PRIMARY KEY,
+	    "create_time" DATE NOT NULL,
+	    "body" VARCHAR(200) NOT NULL
     );`;
 
 // A function to execute the previous query
 execute(createTblQuery).then(result => {
     if (result) {
         console.log('Table "posttable" is created');
+    }
+});
+
+insertDataQuery = `
+    INSERT INTO "posttable" (create_time, body) VALUES
+      ('2022-10-15', 'Anyone knows in which room is the lab today?'),
+      ('2022-11-22', 'Do we need to use Vue.js again?'),
+      ('2022-12-02', 'Homework 4 is too much work');`;
+
+execute(insertDataQuery).then(result => {
+    if (result) {
+        console.log('Data inserted to "posttable" ');
     }
 });
 

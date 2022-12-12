@@ -1,40 +1,18 @@
 <template>
-  <div>
-    <div v-if="post.images">
-      <div class="pictureBodyCard">
-        <div class="cardHeader">
-          <img class="cardProfilePicture" src="../assets/me.png" alt="Profile picture">
-          <p> {{ post.create_time }} </p>
-        </div>
-        <img class="cardImage" :src="post.images" :alt="post.alt">
-        <p class="body"> {{ post.body }} </p>
-        <div class="cardFooter">
-          <div v-on:click="IncreaseLikes ">
-            <img class="thumbsUp" src="../assets/thumbs-up-regular.svg" alt="Thumbs up image">
-          </div>
-          <div>
-            {{ post.likes }} likes
-          </div>
-        </div>
-      </div>
+  <div class="textBodyCard">
+    <div class="cardHeader">
+      <img class="cardProfilePicture" src="../assets/me.png" alt="Profile picture">
+      <p> {{ post.create_time }} </p>
     </div>
-    <div v-else>
-      <div class="textBodyCard">
-        <div class="cardHeader">
-          <img class="cardProfilePicture" src="../assets/me.png" alt="Profile picture">
-          <p> {{ post.create_time }} </p>
-        </div>
-        <div class="textCard">
-          <p> {{ post.body }} </p>
-        </div>
-        <div class="cardFooter">
-          <div v-on:click="IncreaseLikes ">
-            <img class="thumbsUp" src="../assets/thumbs-up-regular.svg" alt="Thumbs up image">
-          </div>
-          <div>
-            {{ post.likes }} likes
-          </div>
-        </div>
+    <div class="textCard">
+      <p> {{ post.body }} </p>
+    </div>
+    <div class="cardFooter">
+      <div v-on:click="IncreaseLikes ">
+        <img class="thumbsUp" src="../assets/thumbs-up-regular.svg" alt="Thumbs up image">
+      </div>
+      <div>
+        {{ post.likes }} likes
       </div>
     </div>
   </div>
