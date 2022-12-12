@@ -1,7 +1,7 @@
 const Pool = require('pg').Pool;
 const pool = new Pool({
-    user: "postgres",
-    password: "password",
+    user: "ken",
+    password: "turvaline",
     database: "post_it",
     host: "localhost",
     port: "5432"
@@ -33,11 +33,9 @@ execute(createTblQuery).then(result => {
 
 createTblQuery = `
     CREATE TABLE IF NOT EXISTS "posttable" (
-	    "id" SERIAL PRIMARY KEY,         
-	    "title" VARCHAR(200) NOT NULL,
+	    "id" SERIAL PRIMARY KEY,
 	    "body" VARCHAR(200) NOT NULL,
-	    "date" TIMESTAMP NOT NULL,
-        "urllink" VARCHAR(200)  
+	    "date" DATE NOT NULL
     );`;
 
 // A function to execute the previous query
