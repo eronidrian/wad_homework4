@@ -9,7 +9,7 @@
         </div>
         <div class="buttons">
           <button @click='this.$router.push("/add_post")'>Add Post</button>
-          <button>Delete all</button>
+          <button @click=this.deleteAll>Delete all</button>
         </div>
       </div>
       <div class="side"></div>
@@ -44,6 +44,23 @@ export default {
     fetchData() {
       fetch("http://localhost:3000/api/posts", {
         method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+          .then((response) => response.json())
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
+    },
+    deleteAll() {
+      fetch("http://localhost:3000/api/posts", {
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },

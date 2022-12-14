@@ -65,18 +65,6 @@ p {
   background-color: lightgrey;
 }
 
-.pictureBodyCard {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  max-width: 700px;
-  min-width: 700px;
-  padding: 1em;
-  font-size: 1.5em;
-  margin-top: .5em;
-  background-color: lightgrey;
-}
-
 @media (max-width: 800px) {
 
   .cardHeader {
@@ -84,18 +72,6 @@ p {
     justify-content: space-between;
     height: 50px;
     margin-bottom: .5em;
-  }
-
-  .pictureBodyCard {
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    max-width: 230px;
-    min-width: 100px;
-    padding: 1em;
-    font-size: 1.5em;
-    margin-top: .5em;
-    background-color: lightgrey;
   }
 
   .textBodyCard {
