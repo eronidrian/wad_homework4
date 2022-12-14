@@ -1,5 +1,5 @@
 <template>
-  <ModifyPostForm></ModifyPostForm>
+  <ModifyPostForm :postId="this.$route.params.id"></ModifyPostForm>
 </template>
 
 <script>
@@ -7,7 +7,7 @@ import ModifyPostForm from "@/components/ModifyPostForm";
 
 export default {
   name: "ModifyPostView",
-  components: {ModifyPostForm}
+  components: {ModifyPostForm},
 }
 </script>
 

@@ -136,6 +136,18 @@ app.post('/api/posts/', async(req, res) => {
         console.error(err.message);
     }
 });
+app.put('/api/posts/', async(req, res) => {
+    try {
+        console.log("a put request has arrived");
+        const post = req.body;
+        const updatePost = await pool.query(
+            "UPDATE posttable SET body = $1 WHERE id = $2", [post.body, post.id]
+        );
+        res.json(updatePost);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
 
 app.get('/api/posts', async(req, res) => {
     try {
@@ -144,6 +156,26 @@ app.get('/api/posts', async(req, res) => {
             "SELECT * FROM posttable"
         );
         res.json(posts.rows);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.get('/api/posts/:id', async(req, res) => {
+    try {
+        console.log("get posts request has arrived");
+        const user = await pool.query("SELECT * FROM posttable WHERE id = $1", [req.params.id]);
+        res.json(user.rows[0]);
+    } catch (err) {
+        console.error(err.message);
+    }
+});
+
+app.delete('/api/posts/:id', async(req, res) => {
+    try {
+        console.log("get posts request has arrived");
+        const deletePost = await pool.query("DELETE FROM posttable WHERE id = $1", [req.params.id]);
+        res.json(deletePost);
     } catch (err) {
         console.error(err.message);
     }

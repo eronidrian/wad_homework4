@@ -9,8 +9,7 @@
 
           <label for="postBody">Post body</label><br>
           <input v-model="postBody" type="text" id="postBody" placeholder="Post Body"><br>
-          <button type="submit">Update post</button> <button type="submit">Delete post</button>
-
+          <button @click=this.updatePost>Update post</button> <button @click=this.deletePost>Delete post</button>
         </form>
       </div>
     </div>
@@ -20,15 +19,71 @@
 <script>
 export default {
   name: "modifyPostForm",
-  methods: {
-
+  props: ["postId"],
+  created() {
+    this.getPost(this.postId);
   },
   data() {
     return {
       postBody: null,
     }
+  },
+  methods: {
+    getPost() {
+      fetch("http://localhost:3000/api/posts/" + this.postId, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+          .then((response) => response.json())
+          .then((data) => {
+            this.postBody = data.body;
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
+    },
+    updatePost() {
+      var data = {
+        id: this.postId,
+        body: this.postBody,
+      };
+      // using Fetch - post method - send an HTTP post request to the specified URI with the defined body
+      fetch("http://localhost:3000/api/posts", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(data),
+      })
+          .then((response) => {
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
+    },
+    deletePost() {
+      fetch("http://localhost:3000/api/posts/" + this.postId, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        credentials: 'include', //  Don't forget to specify this if you need cookies
+      })
+          .then(() => {
+            this.$router.push("/");
+          })
+          .catch((e) => {
+            console.log(e);
+            console.log("error");
+          });
+    },
   }
-
 }
 
 </script>

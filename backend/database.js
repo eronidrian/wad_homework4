@@ -31,15 +31,15 @@ execute(createTblQuery).then(result => {
     }
 });
 
-insertDataQuery = `
+/*insertUserQuery = `
     INSERT INTO "users" (email, password) VALUES
       ('admin@ut.ee', 'parool');`;
 
-execute(insertDataQuery).then(result => {
+execute(insertUserQuery).then(result => {
     if (result) {
         console.log('User inserted to "users" ');
     }
-});
+});*/
 
 createTblQuery = `
     CREATE TABLE IF NOT EXISTS "posttable" (
@@ -52,19 +52,28 @@ createTblQuery = `
 execute(createTblQuery).then(result => {
     if (result) {
         console.log('Table "posttable" is created');
+        execute(checkDataQuery).then(result2 => {
+            if (result2) {
+                execute(insertDataQuery).then(result3 => {
+                    if (result3) {
+                        console.log('Data inserted to "posttable" ');
+                    }
+                });
+            }
+        });
     }
 });
 
-/*insertDataQuery = `
+checkDataQuery = `
+    SELECT COUNT(*) FROM "posttable";
+    `;
+
+insertDataQuery = `
     INSERT INTO "posttable" (create_time, body) VALUES
       (DATE '2022-10-15', 'Anyone knows in which room is the lab today?'),
       (DATE '2022-11-22', 'Do we need to use Vue.js again?'),
       (DATE '2022-12-02', 'Homework 4 is too much work');`;
 
-execute(insertDataQuery).then(result => {
-    if (result) {
-        console.log('Data inserted to "posttable" ');
-    }
-});*/
+
 
 module.exports = pool;

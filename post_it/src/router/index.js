@@ -52,7 +52,7 @@ const routes = [
     }
   },
   {
-    path: '/modify_post',
+    path: '/modify_post/:id',
     name: 'modify_post',
     component: ModifyPostView,
     beforeEnter: async(to, from, next) => {

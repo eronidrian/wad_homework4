@@ -5,7 +5,7 @@
       <div id="mainBody">
         <button v-if = "authResult" @click="Logout" class="center">Logout</button>
         <div v-for="post in posts" :key="post.id">
-          <post-component :post="post" @click='this.$router.push("/modify_post")'></post-component>
+          <post-component :post="post" @click=this.handleClick(post.id)></post-component>
         </div>
         <div class="buttons">
           <button @click='this.$router.push("/add_post")'>Add Post</button>
@@ -41,6 +41,9 @@ export default {
     this.fetchData();
   },
   methods: {
+    handleClick(postId) {
+      this.$router.push({name: 'modify_post', params: { id: postId}});
+    },
     fetchData() {
       fetch("http://localhost:3000/api/posts", {
         method: "GET",
