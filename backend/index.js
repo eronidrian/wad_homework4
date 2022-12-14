@@ -149,12 +149,13 @@ app.get('/api/posts', async(req, res) => {
     }
 });
 
-app.delete('/api/posts', async() => {
+app.delete('/api/posts', async(req, res) => {
     try {
-        console.log("get posts request has arrived");
-        const posts = await pool.query(
+        console.log("delete posts request has arrived");
+        await pool.query(
             "TRUNCATE posttable"
         );
+        res.send("Posts deleted");
     } catch (err) {
         console.error(err.message);
     }

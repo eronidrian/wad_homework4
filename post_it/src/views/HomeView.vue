@@ -50,8 +50,8 @@ export default {
         credentials: 'include', //  Don't forget to specify this if you need cookies
       })
           .then((response) => response.json())
-          .then(() => {
-            this.$router.push("/");
+          .then((data) => {
+            this.posts = data;
           })
           .catch((e) => {
             console.log(e);
@@ -66,9 +66,8 @@ export default {
         },
         credentials: 'include', //  Don't forget to specify this if you need cookies
       })
-          .then((response) => response.json())
-          .then((data) => {
-            this.posts = data;
+          .then(() => {
+            location.reload();
           })
           .catch((e) => {
             console.log(e);
